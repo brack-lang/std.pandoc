@@ -32,13 +32,16 @@
         };
       in {
         packages.default = let
-          name = "std-html";
+          name = "std-pandoc";
           wasmPackage = rustPlatform.buildRustPackage {
             inherit name;
             src = ./.;
             copyLibs = true;
             cargoLock = {
               lockFile = ./Cargo.lock;
+              outputHashes = {
+                "brack-pdk-rs-0.1.0" = "sha256-2qwdQ5uCiAHs6s9A3vRCVhq42XAF91j9gVZtRPLTRRo";
+              };
             };
             CARGO_BUILD_TARGET = target;
             CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER = "${pkgs.llvmPackages.lld}/bin/lld";
@@ -47,6 +50,7 @@
                 base=$(basename $file .wasm)
                 renamed=$(echo $base | sed 's/_/./g').wasm
                 mv $file $(dirname $file)/$renamed
+                echo $file
               done
             '';
             buildPhase = ''
@@ -78,6 +82,7 @@
             alejandra
             extism-cli
             pandoc
+            texliveFull
           ];
         };
       }
