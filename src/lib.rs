@@ -5,11 +5,13 @@ use extism_pdk::{plugin_fn, FnResult, Json};
 use headings::metadata_headings;
 use stmt::metadata_stmt;
 use text::metadata_text;
+use image::metadata_image;
 
 pub mod document;
 pub mod bold;
 pub mod stmt;
 pub mod text;
+pub mod image;
 pub mod headings;
 
 #[plugin_fn]
@@ -19,6 +21,7 @@ pub fn get_metadata() -> FnResult<Json<Vec<Metadata>>> {
     metadata.push(metadata_document());
     metadata.push(metadata_stmt());
     metadata.push(metadata_text());
+    metadata.push(metadata_image());
     for m in metadata_headings() {
         metadata.push(m);
     }
