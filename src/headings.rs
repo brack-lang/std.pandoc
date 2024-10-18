@@ -34,9 +34,17 @@ pub fn headings_level1(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     Ok(format!(
         "{{
     \"t\": \"Header\",
-    \"c\": [1, [], [
-        {}
-    ]]
+    \"c\": [
+        1,
+        [
+            \"\",
+            [],
+            []
+        ],
+        [
+            {}
+        ]
+    ]
 }},",
         text[0..text.len() - 1].to_string()
     ))
@@ -62,9 +70,17 @@ pub fn headings_level2(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     Ok(format!(
         "{{
     \"t\": \"Header\",
-    \"c\": [2, [], [
-        {}
-    ]]
+    \"c\": [
+        2,
+        [
+            \"\",
+            [],
+            []
+        ],
+        [
+            {}
+        ]
+    ]
 }},",
         text[0..text.len() - 1].to_string()
     ))
@@ -90,9 +106,17 @@ pub fn headings_level3(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     Ok(format!(
         "{{
     \"t\": \"Header\",
-    \"c\": [3, [], [
-        {}
-    ]]
+    \"c\": [
+        3,
+        [
+            \"\",
+            [],
+            []
+        ],
+        [
+            {}
+        ]
+    ]
 }},",
         text[0..text.len() - 1].to_string()
     ))
@@ -118,9 +142,17 @@ pub fn headings_level4(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     Ok(format!(
         "{{
     \"t\": \"Header\",
-    \"c\": [4, [], [
-        {}
-    ]]
+    \"c\": [
+        4,
+        [
+            \"\",
+            [],
+            []
+        ],
+        [
+            {}
+        ]
+    ]
 }},",
         text[0..text.len() - 1].to_string()
     ))
@@ -146,9 +178,17 @@ pub fn headings_level5(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     Ok(format!(
         "{{
     \"t\": \"Header\",
-    \"c\": [5, [], [
-        {}
-    ]]
+    \"c\": [
+        5,
+        [
+            \"\",
+            [],
+            []
+        ],
+        [
+            {}
+        ]
+    ]
 }},",
         text[0..text.len() - 1].to_string()
     ))
@@ -174,9 +214,17 @@ pub fn headings_level6(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     Ok(format!(
         "{{
     \"t\": \"Header\",
-    \"c\": [6, [], [
-        {}
-    ]]
+    \"c\": [
+        6,
+        [
+            \"\",
+            [],
+            []
+        ],
+        [
+            {}
+        ]
+    ]
 }},",
         text[0..text.len() - 1].to_string()
     ))
