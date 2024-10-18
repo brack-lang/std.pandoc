@@ -25,6 +25,7 @@ pub fn stmt(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
+    println!("[{}]", text[0..text.len()-1].to_string());
     let inner: JsonValue = serde_json::from_str(&format!("[{}]", text[0..text.len()-1].to_string()))?;
     let inner_first = inner
         .get(0)
