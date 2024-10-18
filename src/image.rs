@@ -65,7 +65,7 @@ pub fn image(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         [
             \"{}\",
             \"{}\"
-        ],
+        ]
     ]
 }},",
         alt[0..alt.len() - 1].to_string(),
