@@ -1,4 +1,4 @@
-use brack_pdk_rs::{metadata::Metadata, values::Value, types::Type};
+use brack_pdk_rs::{metadata::Metadata, types::Type, values::Value};
 use extism_pdk::{plugin_fn, FnResult, Json, WithReturnCode};
 
 pub(crate) fn metadata_bold() -> Metadata {
@@ -13,7 +13,7 @@ pub(crate) fn metadata_bold() -> Metadata {
 #[plugin_fn]
 pub fn bold(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     if args.len() != 1 {
-        return Err(WithReturnCode::new(anyhow::anyhow!("Usage: [* text]"), 1));
+        return Err(WithReturnCode::new(anyhow::anyhow!("Usage: [std.* text]"), 1));
     }
     let text = match &args[0] {
         Value::Text(t) => t,
@@ -24,5 +24,13 @@ pub fn bold(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    Ok(format!("<b>{}</b>", text))
+    Ok(format!(
+        "{{
+    \"t\": \"Strong\",
+    \"c\": [
+        {}
+    ]
+}},",
+        text
+    ))
 }
