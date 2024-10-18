@@ -1,5 +1,6 @@
 use brack_pdk_rs::{metadata::Metadata, types::Type, values::Value};
 use extism_pdk::{plugin_fn, FnResult, Json, WithReturnCode};
+use serde_json::Value as JsonValue;
 
 pub(crate) fn metadata_stmt() -> Metadata {
     Metadata {
@@ -24,13 +25,35 @@ pub fn stmt(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    Ok(format!(
-        "{{
+    let inner: JsonValue = serde_json::from_str(text)?;
+    if let Some(t_value) = inner.get("t") {
+        if let Some(t_str) = t_value.as_str() {
+            match t_str {
+                "Str" | "Emph" | "Underline" | "Strong" | "Strikeout" | "Superscript"
+                | "Subscr" => {
+                    return Ok(format!(
+                        "{{
     \"t\": \"Para\",
     \"c\": [
         {}
     ]
 }},",
-        text[0..text.len() - 1].to_string()
+                        text[0..text.len() - 1].to_string()
+                    ));
+                }
+                _ => {
+                    return Ok(text[0..text.len() - 1].to_string());
+                }
+            }
+        } else {
+            return Err(WithReturnCode::new(
+                anyhow::anyhow!("invalid inner t field {}", t_value),
+                1,
+            ));
+        }
+    }
+    Err(WithReturnCode::new(
+        anyhow::anyhow!("missing inner t field"),
+        1,
     ))
 }
