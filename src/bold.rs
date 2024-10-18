@@ -34,6 +34,6 @@ pub fn bold(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         {}
     ]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
