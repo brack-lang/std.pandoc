@@ -38,7 +38,7 @@ pub fn headings_level1(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         {}
     ]]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
 
@@ -66,7 +66,7 @@ pub fn headings_level2(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         {}
     ]]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
 
@@ -94,7 +94,7 @@ pub fn headings_level3(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         {}
     ]]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
 
@@ -122,7 +122,7 @@ pub fn headings_level4(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         {}
     ]]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
 
@@ -150,7 +150,7 @@ pub fn headings_level5(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         {}
     ]]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
 
@@ -178,6 +178,6 @@ pub fn headings_level6(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         {}
     ]]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
