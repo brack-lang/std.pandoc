@@ -1,4 +1,4 @@
-use brack_pdk_rs::{metadata::Metadata, values::Value, types::Type};
+use brack_pdk_rs::{metadata::Metadata, types::Type, values::Value};
 use extism_pdk::{plugin_fn, FnResult, Json, WithReturnCode};
 
 pub(crate) fn metadata_document() -> Metadata {
@@ -24,11 +24,14 @@ pub fn document(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    Ok(format!("{{
+    Ok(format!(
+        "{{
     \"pandoc-api-version\": [1,23,1],
     \"meta\": {{}},
     \"blocks\": [
         {}
     ]
-}}", text[0..text.len()-1].to_string()))
+}}",
+        text[0..text.len() - 1].to_string()
+    ))
 }

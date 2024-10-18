@@ -13,7 +13,10 @@ pub(crate) fn metadata_bold() -> Metadata {
 #[plugin_fn]
 pub fn bold(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     if args.len() != 1 {
-        return Err(WithReturnCode::new(anyhow::anyhow!("Usage: [std.* text]"), 1));
+        return Err(WithReturnCode::new(
+            anyhow::anyhow!("Usage: [std.* text]"),
+            1,
+        ));
     }
     let text = match &args[0] {
         Value::Text(t) => t,
