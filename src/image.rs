@@ -57,14 +57,14 @@ pub fn image(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         [
             \"\",
             [],
-            [],
+            []
         ],
         [
             {{ \"t\": \"Str\", \"c\": {} }}
         ],
         [
             \"{}\",
-            \"{}\",
+            \"{}\"
         ],
     ]
 }},",
