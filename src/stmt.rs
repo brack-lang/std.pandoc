@@ -25,35 +25,22 @@ pub fn stmt(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    let inner: JsonValue = serde_json::from_str(text)?;
-    if let Some(t_value) = inner.get("t") {
-        if let Some(t_str) = t_value.as_str() {
-            match t_str {
-                "Str" | "Emph" | "Underline" | "Strong" | "Strikeout" | "Superscript"
-                | "Subscr" => {
-                    return Ok(format!(
-                        "{{
+    let inner: JsonValue = serde_json::from_str(&format!("[{}]", text))?;
+    let inner_first = inner
+        .get(0)
+        .ok_or_else(|| anyhow::anyhow!("No first element"))?;
+    match inner_first.get("t").and_then(|t| t.as_str()) {
+        Some("Str") | Some("Emph") | Some("Underline") | Some("Strong") | Some("Strikeout")
+        | Some("Superscript") | Some("Subscr") => Ok(format!(
+            "{{
     \"t\": \"Para\",
     \"c\": [
         {}
     ]
 }},",
-                        text[0..text.len() - 1].to_string()
-                    ));
-                }
-                _ => {
-                    return Ok(text[0..text.len() - 1].to_string());
-                }
-            }
-        } else {
-            return Err(WithReturnCode::new(
-                anyhow::anyhow!("invalid inner t field {}", t_value),
-                1,
-            ));
-        }
+            text[0..text.len() - 1].to_string()
+        )),
+        Some(_) => Ok(text[0..text.len() - 1].to_string()),
+        None => Err(WithReturnCode::new(anyhow::anyhow!("No t field"), 1)),
     }
-    Err(WithReturnCode::new(
-        anyhow::anyhow!("missing inner t field"),
-        1,
-    ))
 }
