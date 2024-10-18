@@ -30,5 +30,5 @@ pub fn document(Json(args): Json<Vec<Value>>) -> FnResult<String> {
     \"blocks\": [
         {}
     ]
-}}", text[1..text.len()-1].to_string()))
+}}", text[0..text.len()-1].to_string()))
 }
