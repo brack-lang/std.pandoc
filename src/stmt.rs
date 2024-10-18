@@ -1,4 +1,4 @@
-use brack_pdk_rs::{metadata::Metadata, values::Value, types::Type};
+use brack_pdk_rs::{metadata::Metadata, types::Type, values::Value};
 use extism_pdk::{plugin_fn, FnResult, Json, WithReturnCode};
 
 pub(crate) fn metadata_stmt() -> Metadata {
@@ -24,10 +24,13 @@ pub fn stmt(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    Ok(format!("{{
+    Ok(format!(
+        "{{
     \"t\": \"Para\",
     \"c\": [
-        {}
+        \"{}\"
     ]
-}},", text))
+}},",
+        text
+    ))
 }
