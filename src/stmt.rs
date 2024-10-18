@@ -25,7 +25,7 @@ pub fn stmt(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    let inner: JsonValue = serde_json::from_str(&format!("[{}]", text))?;
+    let inner: JsonValue = serde_json::from_str(&format!("[{}]", text[0..text.len()-1].to_string()))?;
     let inner_first = inner
         .get(0)
         .ok_or_else(|| anyhow::anyhow!("No first element"))?;
