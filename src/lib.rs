@@ -3,10 +3,12 @@ use brack_pdk_rs::metadata::Metadata;
 use document::metadata_document;
 use extism_pdk::{plugin_fn, FnResult, Json};
 use stmt::metadata_stmt;
+use text::metadata_text;
 
 pub mod document;
 pub mod bold;
 pub mod stmt;
+pub mod text;
 
 #[plugin_fn]
 pub fn get_metadata() -> FnResult<Json<Vec<Metadata>>> {
@@ -14,5 +16,6 @@ pub fn get_metadata() -> FnResult<Json<Vec<Metadata>>> {
     metadata.push(metadata_bold());
     metadata.push(metadata_document());
     metadata.push(metadata_stmt());
+    metadata.push(metadata_text());
     Ok(Json(metadata))
 }
