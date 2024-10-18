@@ -23,12 +23,12 @@ jobs:
       - name: Get latest dev tag
         id: new-tag
         run: |
-          LATEST_TAG=$(gh release list --limit 100 | grep "v-${{ steps.version.outputs.version }}-dev-" | sort -V | tail -n 1 | awk '{print $3}')
+          LATEST_TAG=$(gh release list --limit 100 | grep "v${{ steps.version.outputs.version }}-dev." | sort -V | tail -n 1 | awk '{print $3}')
           if [ -z "$LATEST_TAG" ]; then
-            NEW_TAG="v-${{ steps.version.outputs.version }}-dev-1"
+            NEW_TAG="v${{ steps.version.outputs.version }}-dev.1"
           else
             DEV_NUMBER=$(echo $LATEST_TAG | sed -E 's/^.*-dev-([0-9]+)$/\1/')
-            NEW_TAG="v-${{ steps.version.outputs.version }}-dev-$((DEV_NUMBER + 1))"
+            NEW_TAG="v${{ steps.version.outputs.version }}-dev.$((DEV_NUMBER + 1))"
           fi
           echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
 
