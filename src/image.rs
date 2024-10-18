@@ -68,8 +68,8 @@ pub fn image(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         ]
     ]
 }},",
-        alt[0..alt.len() - 1].to_string(),
-        src[0..src.len() - 1].to_string(),
-        caption[0..caption.len() - 1].to_string(),
+        alt[0..alt.len() - 1].trim().to_string(),
+        src[0..src.len() - 1].trim().to_string(),
+        caption[0..caption.len() - 1].trim().to_string()
     ))
 }
