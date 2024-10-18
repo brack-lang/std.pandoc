@@ -24,5 +24,11 @@ pub fn text(Json(args): Json<Vec<Value>>) -> FnResult<String> {
             ))
         }
     };
-    Ok(format!("{{\"t\": \"Str\", \"c\": \"{}\"}}", text))
+    Ok(format!(
+        "{{
+    \"t\": \"Str\",
+    \"c\": \"{}\"
+}},",
+        text
+    ))
 }

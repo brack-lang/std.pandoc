@@ -28,9 +28,9 @@ pub fn stmt(Json(args): Json<Vec<Value>>) -> FnResult<String> {
         "{{
     \"t\": \"Para\",
     \"c\": [
-        \"{}\"
+        {}
     ]
 }},",
-        text
+        text[0..text.len() - 1].to_string()
     ))
 }
